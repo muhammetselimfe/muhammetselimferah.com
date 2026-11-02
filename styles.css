@@ -403,3 +403,9 @@ button { font: inherit; color: inherit; cursor: pointer; }
 @media (prefers-reduced-motion: reduce) {
   .card, .block, .block.is-new, .typing span { animation: none; transition: none; }
 }
+
+.noscript {
+  max-width: var(--col);
+  margin: 0 auto;
+  padding: 0 16px;
+}

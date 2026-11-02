@@ -171,21 +171,57 @@ const FALLBACK = {
 
 // Matching
 
+// Shorthand and common spellings, rewritten before matching.
+const ALIASES = [
+  [/\bl1 ?beats?\b/g, "l1beat"],
+  [/\bu\b/g, "you"],
+  [/\bur\b/g, "your"],
+  [/\br\b/g, "are"],
+  [/\bpls\b|\bplz\b/g, "please"],
+  [/^(what do you do|what are you doing)( for (a )?(living|work))?( now)?$/, "who are you"],
+  [/\bget in touch\b|\bcontact you\b/g, "contact"],
+];
+
 function normalize(s) {
-  return s.toLowerCase().replace(/[’']/g, "").replace(/[^\p{L}\p{N}\s-]/gu, " ");
+  let q = s.toLowerCase().replace(/[’']/g, "").replace(/[^\p{L}\p{N}\s-]/gu, " ").replace(/\s+/g, " ").trim();
+  for (const [re, to] of ALIASES) q = q.replace(re, to);
+  return q;
 }
 
-const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-for (const intent of INTENTS) {
-  intent.res = intent.keys.map((k) => new RegExp(`(^|\\s)${escapeRe(k)}(?=\\s|$)`, "u"));
+// Edit distance, for typo tolerance ("projets", "avalance").
+function distance(a, b) {
+  const row = Array.from({ length: b.length + 1 }, (_, i) => i);
+  for (let i = 1; i <= a.length; i++) {
+    let prev = row[0];
+    row[0] = i;
+    for (let j = 1; j <= b.length; j++) {
+      const tmp = row[j];
+      row[j] = Math.min(row[j] + 1, row[j - 1] + 1, prev + (a[i - 1] === b[j - 1] ? 0 : 1));
+      prev = tmp;
+    }
+  }
+  return row[b.length];
+}
+
+// Only longer words get fuzzy matches, and the first letter must agree,
+// so "where" never matches "there".
+function fuzzyEqual(word, key) {
+  if (key.length < 5 || word.length < 4 || word[0] !== key[0]) return false;
+  return distance(word, key) <= (key.length >= 8 ? 2 : 1);
 }
 
 function match(text) {
   const q = ` ${normalize(text)} `;
+  const words = q.trim().split(" ");
   let best = null;
   let bestScore = 0;
   for (const intent of INTENTS) {
-    const score = intent.res.reduce((n, re) => n + (re.test(q) ? 1 : 0), 0);
+    let score = 0;
+    for (const key of intent.keys) {
+      if (key.includes(" ")) { if (q.includes(` ${key} `)) score += 1.5; }
+      else if (words.includes(key)) score += 1;
+      else if (words.some((w) => fuzzyEqual(w, key))) score += 0.8;
+    }
     if (score > bestScore) { best = intent; bestScore = score; }
   }
   return best || FALLBACK;
