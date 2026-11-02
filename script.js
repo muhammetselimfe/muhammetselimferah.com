@@ -200,6 +200,11 @@ function h(tag, attrs = {}, ...children) {
     else if (k === "text") el.textContent = v;
     else el.setAttribute(k, v);
   }
+  // External links open in a new tab so the conversation isn't lost.
+  if (tag === "a" && /^https?:/.test(attrs.href || "")) {
+    el.target = "_blank";
+    el.rel = "noopener";
+  }
   for (const c of children) if (c != null) el.append(c);
   return el;
 }
