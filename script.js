@@ -154,7 +154,7 @@ const INTENTS = [
     id: "languages",
     keys: ["speak", "turkish", "english", "türkçe", "turkce", "languages"],
     answer: [
-      { p: "Turkish is my native language and I work in English every day. I run workshops in both." },
+      { p: "Turkish is my native language and I work in English every day." },
     ],
     follow: ["Where are you based?", "How can I reach you?"],
   },
