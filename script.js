@@ -55,12 +55,13 @@ const INTENTS = [
       { card: "projects" },
       { p: "I've also contributed to the Avalanche Builders Hub, Avalanche Academy and avalanche-cli. There's more on my [GitHub](https://github.com/muhammetselimfe)." },
     ],
-    follow: ["What is L1Beat?", "What's your tech stack?", "How can I reach you?"],
+    follow: ["Tell me about your bots", "What is L1Beat?", "What's your tech stack?"],
   },
   {
     id: "defi",
-    keys: ["defi", "aave", "benqi", "liquidation", "liquidations", "lending", "bad debt", "rwa", "tokenization"],
+    keys: ["defi", "aave", "benqi", "liquidation", "liquidations", "lending", "bad debt", "rwa", "tokenization", "mev", "bot", "bots", "searcher", "liquidator"],
     answer: [
+      { p: "I run my own liquidation and MEV bots. The repos are private, so there's no public code to link to." },
       { p: "On the data side, I indexed every on-chain position and liquidation across Aave and Benqi on Avalanche and built an internal dashboard to monitor bad debt." },
       { p: "Before that, as product manager at Shipex, I worked on staking and governance design for tokenizing regulated real-world assets." },
     ],
@@ -352,7 +353,8 @@ const CARDS = {
       linkCard("https://github.com/L1Beat/L1Beat-frontend", "L1Beat Frontend", "TypeScript and React app behind l1beat.io"),
       linkCard("https://github.com/L1Beat/L1Beat-backend", "L1Beat Backend", "Node.js REST API serving L1 data"),
       linkCard("https://github.com/L1Beat/Icicle-Indexer", "Icicle Indexer", "Fast Avalanche P-Chain and L1 indexer in Go"),
-      linkCard("https://github.com/muhammetselimfe/Icicle-Markets", "Icicle Markets", "Avalanche explorer, swaps and prediction markets"));
+      linkCard("https://github.com/muhammetselimfe/Icicle-Markets", "Icicle Markets", "Avalanche explorer, swaps and prediction markets"),
+      h("div", { class: "card" }, h("span", { class: "card-title", text: "Liquidation & MEV bots" }), h("span", { class: "card-sub", text: "Running my own bots, private repos" })));
   },
 
   timeline() {
