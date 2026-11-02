@@ -119,13 +119,13 @@ const INTENTS = [
     answer: [
       { p: "Easiest is email. I'm happy to talk about Avalanche, on-chain data, developer tooling or speaking at your event." },
       { card: "contact" },
-      { p: "You can also reach me on [X](https://x.com/muhammetselimfe)." },
+      { p: "You can also reach me on [LinkedIn](https://www.linkedin.com/in/muhammetselimfe/) or [X](https://x.com/muhammetselimfe)." },
     ],
     follow: ["Who are you?", "What is L1Beat?"],
   },
   {
     id: "social",
-    keys: ["twitter", "x", "social", "socials", "follow", "links"],
+    keys: ["twitter", "x", "linkedin", "social", "socials", "follow", "links"],
     answer: [
       { p: "Here's where to find me:" },
       { card: "socials" },
@@ -340,6 +340,7 @@ const CARDS = {
       h("span", { class: "card-title", text: "GitHub" }),
       h("span", { class: "card-sub" }, liveSpan("repos", 51), " public repos"));
     return h("div", { class: "list" },
+      linkCard("https://www.linkedin.com/in/muhammetselimfe/", "LinkedIn", "muhammetselimfe"),
       linkCard("https://x.com/muhammetselimfe", "X", "@muhammetselimfe"),
       gh,
       linkCard("https://medium.com/@avax", "Medium", "Guides since 2020"),
