@@ -26,7 +26,7 @@
     "name": "Selim Ferah",
     "alternateName": "Muhammet Selim Ferah",
     "url": "https://muhammetselimferah.com/",
-    "image": "https://github.com/muhammetselimfe.png",
+    "image": "https://muhammetselimferah.com/assets/avatar.jpg",
     "jobTitle": "Developer Advocate & Full-Stack Engineer",
     "worksFor": { "@type": "Organization", "name": "L1Beat", "url": "https://l1beat.io" },
     "homeLocation": { "@type": "Place", "name": "Malta" },
@@ -42,15 +42,13 @@
   }
   </script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/bricolage-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="is-empty">
   <header class="topbar">
     <button type="button" class="brand" id="new-chat" aria-label="Start a new chat">
-      <img src="https://github.com/muhammetselimfe.png?size=64" alt="" width="28" height="28">
+      <img src="assets/avatar.jpg" alt="" width="28" height="28">
       <span>Selim Ferah</span>
     </button>
     <nav class="top-links" aria-label="Elsewhere">
@@ -78,7 +76,7 @@
 
   <main class="stage">
     <section class="welcome" id="welcome">
-      <img class="welcome-avatar" src="https://github.com/muhammetselimfe.png?size=200" alt="Selim Ferah" width="88" height="88">
+      <img class="welcome-avatar" src="assets/avatar.jpg" alt="Selim Ferah" width="88" height="88">
       <h1>Hi, I'm Selim.<br>Ask me anything about my work.</h1>
     </section>
 
@@ -87,7 +85,8 @@
     <div class="composer-wrap">
       <form class="composer" id="composer">
         <label class="sr-only" for="prompt">Ask Selim a question</label>
-        <textarea id="prompt" rows="1" placeholder="Ask me anything…" autocomplete="off"></textarea>
+        <textarea id="prompt" rows="1" placeholder="Ask me anything…" autocomplete="off" aria-keyshortcuts="/"></textarea>
+        <kbd class="kbd" aria-hidden="true" title="Press / to type">/</kbd>
         <button type="submit" id="send" aria-label="Send" disabled>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
         </button>

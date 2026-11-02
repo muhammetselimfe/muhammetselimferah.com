@@ -2,7 +2,7 @@
 // Each intent has keywords and an answer made of parts: paragraphs (with
 // [label](url) links) and cards. Paragraphs stream in word by word.
 
-const AVATAR = "https://github.com/muhammetselimfe.png?size=64";
+const AVATAR = "assets/avatar.jpg";
 const EMAIL = "selim@l1beat.io";
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -499,12 +499,34 @@ async function ask(question) {
     if (part.p) await streamParagraph(reply, part.p);
     else { reply.append(CARDS[part.card]()); scrollDown(); await sleep(150); }
   }
+  reply.append(shareButton(question));
 
   log.removeAttribute("aria-busy");
   setSuggestions(intent.follow);
   busy = false;
   updateControls();
   input.focus({ preventScroll: true });
+}
+
+// Link that reopens the site and asks the same question.
+function shareButton(question) {
+  const url = new URL(location.pathname, location.href);
+  url.searchParams.set("q", question);
+  const btn = h("button", { type: "button", class: "share", text: "Share answer" });
+  btn.addEventListener("click", async () => {
+    if (navigator.share && matchMedia("(pointer: coarse)").matches) {
+      try { await navigator.share({ title: "Selim Ferah", text: question, url: url.href }); } catch {}
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(url.href);
+      btn.textContent = "Link copied";
+    } catch {
+      btn.textContent = "Copy failed";
+    }
+    setTimeout(() => { btn.textContent = "Share answer"; }, 2000);
+  });
+  return h("div", { class: "msg-actions" }, btn);
 }
 
 function autosize() {
@@ -529,6 +551,14 @@ form.addEventListener("submit", (e) => { e.preventDefault(); ask(input.value); }
 input.addEventListener("input", () => { autosize(); updateControls(); });
 input.addEventListener("keydown", (e) => {
   if (e.key === "Enter" && !e.shiftKey && !e.isComposing) { e.preventDefault(); ask(input.value); }
+});
+// "/" jumps to the prompt box, unless the visitor is already typing somewhere.
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "/" || e.metaKey || e.ctrlKey || e.altKey) return;
+  const t = e.target;
+  if (t.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(t.tagName)) return;
+  e.preventDefault();
+  input.focus();
 });
 document.getElementById("new-chat").addEventListener("click", reset);
 document.getElementById("new-chat-2").addEventListener("click", reset);
