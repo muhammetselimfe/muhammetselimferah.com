@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
+  <title>Selim Ferah</title>
+  <meta name="description" content="Ask Selim Ferah anything: developer advocate and full-stack engineer in the Avalanche ecosystem, founder of L1Beat.">
+  <meta property="og:title" content="Selim Ferah">
+  <meta property="og:description" content="Developer advocate and full-stack engineer in the Avalanche ecosystem. Founder of L1Beat.">
+  <meta property="og:url" content="https://muhammetselimferah.com">
+  <meta property="og:image" content="https://github.com/muhammetselimfe.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@muhammetselimfe">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="is-empty">
+  <header class="topbar">
+    <button type="button" class="brand" id="new-chat" aria-label="Start a new chat">
+      <img src="https://github.com/muhammetselimfe.png?size=64" alt="" width="28" height="28">
+      <span>Selim Ferah</span>
+    </button>
+    <nav class="top-links" aria-label="Elsewhere">
+      <a href="https://x.com/muhammetselimfe" aria-label="X">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L2.8 2h6.4l4.4 5.9L18.9 2Zm-1.1 18.1h1.7L7.4 3.8H5.6l12.2 16.3Z"/></svg>
+      </a>
+      <a href="https://github.com/muhammetselimfe" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5Z"/></svg>
+      </a>
+      <button type="button" class="new-btn" id="new-chat-2">New chat</button>
+    </nav>
+  </header>
+
+  <main class="stage">
+    <section class="welcome" id="welcome">
+      <img class="welcome-avatar" src="https://github.com/muhammetselimfe.png?size=200" alt="Selim Ferah" width="88" height="88">
+      <h1>Hi, I'm Selim.<br>Ask me anything about my work.</h1>
+    </section>
+
+    <div class="log" id="log" role="log" aria-live="polite" aria-label="Conversation"></div>
+
+    <div class="composer-wrap">
+      <form class="composer" id="composer">
+        <label class="sr-only" for="prompt">Ask Selim a question</label>
+        <textarea id="prompt" rows="1" placeholder="Ask me anything…" autocomplete="off"></textarea>
+        <button type="submit" id="send" aria-label="Send" disabled>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+        </button>
+      </form>
+      <div class="suggestions" id="suggestions" aria-label="Suggested questions"></div>
+      <p class="note">Answers are written by Selim, not generated.</p>
+    </div>
+  </main>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
